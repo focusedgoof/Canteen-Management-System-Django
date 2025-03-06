@@ -1,4 +1,4 @@
-##CMS(Python)
+# CMS(Python)
 
 1. How to set up the project?
     " install python from: https://www.python.org/downloads/
