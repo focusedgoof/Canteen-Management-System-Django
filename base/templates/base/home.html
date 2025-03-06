@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="home-containerr">
+    <h3>Welcome to MyCafe Cooking</h3>
+    <p>Experience the best coffee and snacks in town. We offer a variety of items to satisfy your cravings.</p>
+
+    {% if request.user.is_authenticated %}
+    <p>Hello, {{ request.user.username }}!</p>
+    <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+    {% else %}
+    <p>Not a member? <a href="{% url 'login' %}" class="btn btn-login">Login</a></p>
+    {% endif %}
+
+    <div class="features">
+        <h4>Why Choose Us?</h4>
+        <ul>
+            <li>High-quality ingredients</li>
+            <li>Friendly atmosphere</li>
+            <li>Excellent customer service</li>
+            <li>Wide variety of options</li>
+        </ul>
+    </div>
+
+    <div class="history">
+        <h4>Our Story</h4>
+        <p>Founded in 2010, MyCafe Cooking started as a small coffee shop with a passion for delivering exceptional quality and service. </p>
+        <p>Over the years, we’ve grown into a beloved local spot, known for our commitment to using only the finest ingredients and our dedication to providing a warm, welcoming environment. Whether you're here for a quick coffee break, a leisurely meal, or a special celebration, we're here to make your experience memorable.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if page == 'login' %}
+    <div class="item-form-container">
+
+        <form method="POST" action="" class="employee-profile-form">
+            {% csrf_token %}
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter Username" class="input-field">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter Password" class="input-field">
+            <input type="submit" value="Login" class="submit-btn">
+
+        </form>
+        
+        <p class="info-text">Haven't signed up yet?</p>        
+        <p class="info-text">Contact Admin</p>
+
+    </div>
+
+    {% else %}
+    <div class="registration-form-container">
+
+        <form method="POST" action="" class="employee-profile-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Register" class="submit-btn">
+        </form>
+
+        <p class="info-text">Already signed up? <a href="{% url 'login' %}">Login</a></p>        
+    </div>
+
+    {% endif %}
+
+{% endblock content %}

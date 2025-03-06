@@ -1,0 +1,23 @@
+{% load static %}
+<div class="navbar">
+    <a href="{% url 'home' %}">
+        <img src="{% static './assets/logo.png' %}" alt="logo" class="logo"> 
+    </a>
+    <div class="nav-links">
+        {% if is_admin %}
+            <a href="{% url 'home' %}">Admin</a>
+            <ul>
+                <a href="{% url 'employeeData' %}">Employee Portal</a>
+                <a href="{% url 'items' %}">Items Portal</a>
+                <a href="{% url 'allPurchaseHistory' %}">View Purchase History</a>
+            </ul>
+        {% elif request.user.is_authenticated and request.user.employee_profile %}
+            <a href="{% url 'home' %}">Employee</a>
+            <ul>
+                <a href="{% url 'employeeInfo' request.user.employee_profile.Id %}">Employee Details</a>
+                <a href="{% url 'items' %}">Items Portal</a>
+                <a href="{% url 'employeePurchaseHistory' request.user.employee_profile.Id %}">View Purchase History</a>
+            </ul>
+        {% endif %}
+    </div>
+</div>

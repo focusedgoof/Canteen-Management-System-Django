@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    
+    <div class="item-form-container">
+        <h3>Add item details... </h3>
+        <div>
+          <form method="POST" action="" class="employee-profile-form">
+            {% csrf_token %}
+            {{form.as_p}}
+            
+            <input type="submit" value="Add" class="submit-btn">
+          </form>
+    
+        </div>
+
+    </div>
+
+{% endblock %}
+

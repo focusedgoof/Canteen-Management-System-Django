@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="purchase-form-container">
+    <h2>Make a Purchase for {{ employee.FirstName }} {{ employee.LastName }}</h2>
+
+    <div id="error-message">
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        <div id="item-container">
+            <div class="item-row">
+                <div class="item-details">
+                    <label for="items">Select Item:</label>
+                    <select name="items" class="item-select" required>
+                        {% for item in items %}
+                            <option value="{{ item.id }}">{{ item.ItemName }} - Rs.{{ item.Amount }}</option>
+                        {% endfor %}
+                    </select>
+                
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" class="item-quantity" min="1" required>
+                </div>
+                <div class="update-purchase">  
+                    <button type="button" id="add-item-btn">Add Item</button>
+                    <button type="button" class="remove-item-btn">Remove Item</button>
+                </div>
+               
+               
+            </div>
+        </div>
+        
+        
+        <input type="submit" value="Purchase">
+    </form>
+
+    <a href="{% url 'employeeInfo' employee.Id %}" class="back-link">Back to Employee Details</a>
+</div>
+
+
+<script>
+document.getElementById('add-item-btn').addEventListener('click', function() {
+    var container = document.getElementById('item-container');
+    var newRow = document.createElement('div');
+    newRow.classList.add('item-row');
+    newRow.innerHTML = `
+       <div class="item-details">
+            <label for="items">Select Item:</label>
+            <select name="items" class="item-select" required>
+                {% for item in items %}
+                    <option value="{{ item.id }}">{{ item.ItemName }} - Rs.{{ item.Amount }}</option>
+                {% endfor %}
+            </select>
+        
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" class="item-quantity" min="1" required>
+        </div>
+        <div class="update-purchase">  
+            <button type="button" id="add-item-btn">Add Item</button>
+            <button type="button" class="remove-item-btn">Remove Item</button>
+        </div>
+        
+        
+    `;
+    container.appendChild(newRow);
+
+    newRow.querySelector('.remove-item-btn').addEventListener('click', function() {
+        container.removeChild(newRow);
+    });
+});
+
+document.querySelectorAll('.remove-item-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        button.parentElement.remove();
+    });
+});
+</script>
+{% endblock %}

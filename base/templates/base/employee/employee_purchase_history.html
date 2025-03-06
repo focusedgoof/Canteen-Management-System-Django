@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="purchase-history-container">
+    <h3>Purchase History for {{ employee.FirstName }} {{ employee.LastName }}</h3>
+    <hr>
+
+    {% if purchases %}
+        <table class="purchase-history-table">
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee Name</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Purchased At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for purchase in purchases %}
+                    <tr>
+                        <td>{{ purchase.employee.Id }}</td>
+                        <td>{{ purchase.employee.FirstName }} {{ purchase.employee.LastName }}</td>
+                        <td>{{ purchase.item.ItemName }}</td>
+                        <td>{{ purchase.quantity }}</td>
+                        <td>Rs.{{ purchase.amount }}</td>
+                        <td>{{ purchase.purchased_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No purchases made so far.</p>
+    {% endif %}
+</div>
+{% endblock %}

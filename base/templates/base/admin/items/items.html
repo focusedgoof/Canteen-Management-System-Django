@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="items-container">
+    <h3>List of All Items Available in the Menu</h3>
+    <hr>
+    {% if is_admin %}
+    <a href="{% url 'createItem' %}" class="add-item">Add Item</a>
+    {% endif %}
+
+    <form method="GET" action="{% url 'items' %}" class="search-form">
+        <input type="text" name="i" placeholder="Search Items..">
+    </form>
+    
+    <a href="{% url 'items' %}" class="search-all">All</a>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Amount</th>
+                <th>Quantity</th>
+                {% if is_admin %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><a href="{% url 'items' %}?q={{ item.ItemName }}" class="item-name">{{ item.ItemName }}</a></td>
+                <td>Rs {{ item.Amount }}</td>
+                <td>{{ item.Quantity }}</td>
+                {% if is_admin %}
+                <td class="action-links">
+                    <a href="{% url 'updateItem' item.id %}" class="btn-secondary">Edit</a>
+                    <a href="{% url 'deleteItem' item.id %}" class="btn-secondary">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

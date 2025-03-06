@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="employee-info-container">
+    <h3>Employee Information</h3>
+    <div class="info-row">
+        <div class="info-label">ID:</div>
+        <div class="info-value">{{ employeeInfo.Id }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-label">First Name:</div>
+        <div class="info-value">{{ employeeInfo.FirstName }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-label">Last Name:</div>
+        <div class="info-value">{{ employeeInfo.LastName }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-label">Email:</div>
+        <div class="info-value">{{ employeeInfo.MailId }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-label">Balance:</div>
+        <div class="info-value">{{ employeeInfo.Balance }}</div>
+    </div>
+
+    <a href="{% url 'makePurchase' employeeInfo.Id %}" class="btn-primary">Make Purchase</a>
+</div>
+{% endblock %}

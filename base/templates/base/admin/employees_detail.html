@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="employee-list-container">
+    <h3>List of all employees with some Details</h3>
+    <hr>
+
+    <a href="{% url 'registerPage' %}" class="add-employee">Add Employee</a>
+
+    <form method="GET" action="{% url 'employeeData' %}" class="search-form">
+        <input type="text" name="q" placeholder="Search Employee Id..">
+    </form>
+
+    <a href="{% url 'employeeData' %}" class="search-all">All</a>
+    
+    <table class="employee-table">
+        <thead>
+            <tr>
+                <th>Employee Id</th>
+                <th>Full Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employeeData %}
+            <tr>
+                <td><a href="{% url 'employeeData' %}?q={{employee.Id}}">{{employee.Id}}</a></td>
+                <td><a href="{% url 'employeeInfo' employee.Id %}">{{employee.FirstName}} {{employee.LastName}}</a></td>
+                <td class="action-links">
+                    <a href="{% url 'updateUser' employee.Id %}">Edit</a>
+                    <a href="{% url 'deleteUser' employee.Id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
